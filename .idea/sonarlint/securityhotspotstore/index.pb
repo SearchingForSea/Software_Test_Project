@@ -5,3 +5,5 @@ C
 frontend/.gitignore,e\2\e23a63a9f05477a70f6e75d709dbb4eae2db742d
 E
 frontend/package.json,3\7\37083060967a471c011a16651e22bdc2ade41759
+U
+%frontend/src/components/BasicInfo.vue,e\c\ecfa30b8bd52a24c1be753e500495ff9fb915689
