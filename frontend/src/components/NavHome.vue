@@ -24,6 +24,13 @@
           <i class="el-icon-menu"></i>
           <span slot="title">集群操作</span>
         </el-menu-item>
+        <el-menu-item
+            index="/home/resource"
+            class="el-menu-item"
+        >
+          <i class="el-icon-s-tools"></i>
+          <span slot="title">集群负载</span>
+        </el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
@@ -32,6 +39,11 @@
 <script>
 export default {
   name: "NavHome",
+  created() {
+    if (this.$route.path !== '/home/basic-info') {
+      this.$router.push('/home/basic-info')
+    }
+  },
   methods: {
     handleSelect(key) {
       this.$router.push(key)

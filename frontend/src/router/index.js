@@ -5,6 +5,7 @@ import LoginPage from "@/views/LoginPage"
 
 const BasicInfo = () => import('@/components/BasicInfo')
 const OptimizationPage = () => import('@/components/OptimizationPage')
+const ResourceMangae = () => import('@/components/ResourceManage')
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,10 @@ const routes = [
                 path: '/home/optimization',
                 name: 'optimization',
                 component: OptimizationPage
+            },{
+                path: '/home/resource',
+                name: 'resourceManage',
+                component: ResourceMangae
             }
         ]
     },

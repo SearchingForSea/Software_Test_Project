@@ -1,7 +1,8 @@
-from django.conf.urls import url
+from django.urls import re_path
 from . import views
 
 urlpatterns = [
-    url('show_res', views.get_info),
-    url('basic_info', views.basic_info)
+    re_path('show_res', views.get_info),
+    re_path('basic_info', views.basic_info),
+    re_path('balancing_node_steps', views.distribute_node)
 ]
