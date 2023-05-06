@@ -54,12 +54,12 @@ export default {
 
 <style scoped>
 .tac {
-  width: 35vh;
+  width: 15vw;
   display: inline-block;
 }
 .el-menu-vertical {
   height: 100vh;
-  width: 35vh;
+  width: 15vw;
 }
 .el-menu-item {
   height: 20vh;
