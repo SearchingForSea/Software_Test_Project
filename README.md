@@ -1,94 +1,33 @@
-# Django·½Ãæ
+æ¨èä½¿ç”¨ pycharm æ‰“å¼€é¡¹ç›®ï¼Œå› ä¸ºå·²ç»å†…ç½® django ç¨‹åºæ— éœ€å†åœ¨ç¯å¢ƒä¸­ä¸‹è½½
 
-½øÈë backend ÎÄ¼ş¼Ğ£¬°´ÒÔÏÂË³ĞòÖ´ĞĞÃüÁî£º
+# Djangoæ–¹é¢
 
-1. °²×° corsheaders
-
-```
-pip3 install django-cors-headers
-```
-
-2. ÕÒµ½Ö÷Ä¿Â¼ÏÂsettings.py
+1. å»ºè¡¨ä¸è¿è¡Œ
 
 ```
-INSTALLED_APPS = [
-    ¡¤¡¤¡¤
-    'corsheaders',
-    ¡¤¡¤¡¤
-]
-```
+python manage.py makemigrations // è®°å½•æ‰€æœ‰åœ¨ models.py æ–‡ä»¶ä¸­çš„æ‰€æœ‰å˜åŠ¨
 
-3. Í¬ÑùÔÚsettings.pyÎÄ¼şÖĞ
+python manage.py migrate app01 // å°†ä»¥ä¸Šè®°å½•çš„æ–°å˜åŠ¨ä½œç”¨åˆ°æ•°æ®åº“ä¸­
 
-```
-MIDDLEWARE = [
-    ¡¤¡¤¡¤
-    'corsheaders.middleware.CorsMiddleware',  # ½â¾ö¿çÓòÎÊÌâ£¬×¢ÒâÓëcommon.CommonMiddlewareµÄË³Ğò
-    'django.middleware.common.CommonMiddleware',
-    ¡¤¡¤¡¤
-]
-// ×¢Òâ£º'corsheaders.middleware.CorsMiddleware' Òª·ÅÔÚ×îÇ°Ãæ
-```
+python manage.py createsuperuser // åˆ›å»ºç®¡ç†å‘˜
 
-4. »¹ÊÇÔÚsettings.pyÎÄ¼şÖĞ
+// è¿›å…¥ backend æ–‡ä»¶å¤¹ï¼Œä¾æ¬¡æ‰§è¡Œï¼š
+pip install pandas
+pip install openpyxl
 
-```
-# Ôö¼Ó¿çÓòºöÂÔ
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
-# ÔÊĞíËùÓĞ·½·¨
-CORS_ALLOW_METHODS = ('*')
-# ÔÊĞíËùÓĞÇëÇóÍ·
-CORS_ALLOW_HEADERS = ('*')
-# ÔÊĞíĞ¯´øcookie
-CORS_ALLOW_CREDENTIALS = True 
-```
+python manage.py runserver 127.0.0.1:8000 // å¯åŠ¨ç¨‹åº
 
-Èç¹ûÏë¸ü°²È«»òÕßÊÇ¸ü¼ÓÓĞÕë¶ÔĞÔÒ»µãµÄ»°£¬¿ÉÒÔ¾ÍÌí¼Ó°×Ãûµ¥£º
-
-```
-CORS_ORIGIN_WHITELIST = (
-	'localhost:8080',
-)
-\\ ·²ÊÇ³öÏÖÔÚ°×Ãûµ¥ÀïµÄÓòÃû¶¼¿ÉÒÔ·ÃÎÊºó¶Ë¡£
-```
-
-5. ½¨±íÓëÔËĞĞ
-
-```
-python manage.py makemigrations // ¼ÇÂ¼ËùÓĞÔÚ models.py ÎÄ¼şÖĞµÄËùÓĞ±ä¶¯
-
-python manage.py migrate app01 // ½«ÒÔÉÏ¼ÇÂ¼µÄĞÂ±ä¶¯×÷ÓÃµ½Êı¾İ¿âÖĞ
-
-python manage.py createsuperuser // ´´½¨¹ÜÀíÔ±
-
-python manage.py runserver 127.0.0.1:8000 // Æô¶¯³ÌĞò£¬ºóÃæµÄ ip ºÍ ¶Ë¿Ú¿ÉÒÔ×Ô¼ºÉèÖÃ£¬²»¹ıÎªÁËÇ°ºóÁªµ÷ÔİÉèÈç´Ë
 ```
 
 
-# Vue·½Ãæ
+# Vueæ–¹é¢
 
-1.vueÕâ±ßÖ÷Òª¾ÍÓÃÒ»¸öaxios£¬ÓĞÁËËû¾Í¿ÉÒÔ½øĞĞ¿çÓò·ÃÎÊºó¶ËµÄÏµÍ³ÁË
-Ê×ÏÈ¾ÍÊÇÒªÏÂÔØ£¬Ê¹ÓÃnpmÏÂÔØ£º
-
-```
-npm install axios
-```
-
-2. ÔÚÏîÄ¿Ä¿Â¼µÄsrcÀïÃæµÄmain.jsÒıÈëaxiosÒÔ¼°¹ÒÔØaxios
+1. è¿è¡Œ
 
 ```
-import axios from 'axios'
-//¹ÒÔØaxios
-Vue.prototype.$http = axios
-//·ÃÎÊ¸ùÂ·¾¶
-axios.defaults.baseURL = "http://127.0.0.1:1101"
-```
+yarn install // ä¸‹è½½ä¾èµ–
 
-3. ÔËĞĞ
+yarn serve // è¿è¡Œç¨‹åº
 
-```
-yarn install // ÏÂÔØÒÀÀµ
-
-yarn serve // ÔËĞĞ³ÌĞò
+// åœ¨æµè§ˆå™¨è¾“å…¥ç›¸åº”ç«¯å£
 ```
