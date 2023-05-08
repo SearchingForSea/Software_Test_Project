@@ -19,6 +19,7 @@ python manage.py runserver 127.0.0.1:8000 // 启动程序
 1. 运行
 
 ```
+// 进入 /frontend 文件路径
 yarn install // 下载依赖
 
 yarn serve // 运行程序
