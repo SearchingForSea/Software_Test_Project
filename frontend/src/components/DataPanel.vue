@@ -25,7 +25,7 @@
       </div>
       <div>
         <span class="message-title">平均使用率:  </span>
-        <span class="card-message"> {{ (bm_data.avg_rate * 100).toFixed(2) }}% </span>
+        <span class="card-message"> {{ (bm_data.avg_rate).toFixed(2) }}% </span>
       </div>
       <div>
         <span class="message-title">包含的虚拟机:  </span>

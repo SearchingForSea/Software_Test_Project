@@ -102,8 +102,9 @@ export default {
   },
   created() {
     this.$https.get('http://127.0.0.1:8000/api/basic_info').then((response) => {
+      console.log(response.data)
       response.data.forEach((value) => {
-        this.es_data.push(value.fields)
+        this.es_data.push(value)
       })
       this.tableData = this.es_data
     })

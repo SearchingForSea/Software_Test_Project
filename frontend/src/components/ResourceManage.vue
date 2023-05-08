@@ -1,18 +1,26 @@
 <template>
   <div class="resource_manage">
     <div class="el-table--home">
+      <h3>平均利用率: {{ (100 * avg_index).toFixed(2) }}%</h3>
       <el-table
           :data="bm_data"
           class="el-table--fit"
           stripe
           :default-sort = "{prop: 'name', order: 'ascending'}"
+          :cell-style="styleBack"
           @sort-change="onNameSortChange"
           @row-click="handleRowClick"
       >
         <el-table-column
+            label="ID"
+            width="40"
+            type="index"
+            class="table-column--item"
+        />
+        <el-table-column
             prop="name"
             label="物理机名"
-            width="120"
+            width="108"
             sortable="custom"
             align="center"
             class="table-column--item"
@@ -20,7 +28,7 @@
         <el-table-column
             prop="store"
             label="存储(G)"
-            width="120"
+            width="108"
             sortable
             align="center"
             class="table-column--item"
@@ -28,7 +36,7 @@
         <el-table-column
             prop="cpu_num"
             label="cpu数量(个)"
-            width="140"
+            width="135"
             sortable
             align="center"
             class="table-column--item"
@@ -36,7 +44,7 @@
         <el-table-column
             prop="memory"
             label="内存(M)"
-            width="120"
+            width="110"
             sortable
             align="center"
             class="table-column--item"
@@ -76,17 +84,23 @@ export default {
   },
   created() {
     this.$https.get('http://127.0.0.1:8000/api/manage_resource').then((response) => {
-      this.bm_data = response.data
-      this.bm_data.forEach((item, index, arr) => {
-        arr[index].avg_rate = parseFloat((100 - arr[index].avg_rate * 100).toFixed(2))
-      })
-      this.bm_data.sort((a, b) => parseInt(a.name.slice(3)) - parseInt(b.name.slice(3)))
+      this.avg_index = response.data.avg_rate
+      this.bm_data = response.data.return_bm_data
+      if (typeof this.bm_data === 'object') {
+        this.bm_data.forEach((item, index, arr) => {
+          arr[index].avg_rate = parseFloat((100 - arr[index].avg_rate * 100).toFixed(2))
+        })
+        this.bm_data.sort((a, b) => parseInt(a.name.slice(3)) - parseInt(b.name.slice(3)))
+      } else {
+        alert(this.bm_data)
+      }
     })
   },
   data() {
     return {
       bm_data: null,
-      displayData: null
+      displayData: null,
+      avg_index: 0
     }
   },
   methods: {
@@ -99,6 +113,21 @@ export default {
           this.bm_data.sort((a, b) => parseInt(a.name.slice(3)) - parseInt(b.name.slice(3)))
         } else {
           this.bm_data.sort((a, b) => parseInt(b.name.slice(3)) - parseInt(a.name.slice(3)))
+        }
+      }
+    },
+    styleBack({ row }) {
+      if (row.avg_rate === 0) {
+        return { backgroundColor: "rgba(33,236,65,0.61)" }
+      } else if (row.avg_rate > 90) {
+        return {
+          backgroundColor: "rgba(234,7,7,0.69)",
+          color: 'white'
+        }
+      } else {
+        return {
+          backgroundColor: "rgba(243,191,22,0.69)",
+          color: 'white'
         }
       }
     }
@@ -120,6 +149,9 @@ export default {
 }
 .el-table--fit {
   font-size: 16px;
+}
+.el-table--fit:hover {
+  cursor: pointer;
 }
 .display-page {
   height: 96vh;
