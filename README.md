@@ -1,4 +1,4 @@
-# 推荐使用 pycharm 打开项目，因为已经内置 django 程序无需再在环境中下载
+# 推荐使用 pycharm 打开项目至 /backend，因为已经内置 django 程序无需再在环境中下载
 
 # Django方面
 
