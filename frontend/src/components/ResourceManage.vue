@@ -7,6 +7,7 @@
           class="el-table--fit"
           stripe
           :default-sort = "{prop: 'name', order: 'ascending'}"
+          :cell-style="styleBack"
           @sort-change="onNameSortChange"
           @row-click="handleRowClick"
       >
@@ -112,6 +113,21 @@ export default {
           this.bm_data.sort((a, b) => parseInt(a.name.slice(3)) - parseInt(b.name.slice(3)))
         } else {
           this.bm_data.sort((a, b) => parseInt(b.name.slice(3)) - parseInt(a.name.slice(3)))
+        }
+      }
+    },
+    styleBack({ row }) {
+      if (row.avg_rate === 0) {
+        return { backgroundColor: "rgba(33,236,65,0.61)" }
+      } else if (row.avg_rate > 90) {
+        return {
+          backgroundColor: "rgba(234,7,7,0.69)",
+          color: 'white'
+        }
+      } else {
+        return {
+          backgroundColor: "rgba(243,191,22,0.69)",
+          color: 'white'
         }
       }
     }

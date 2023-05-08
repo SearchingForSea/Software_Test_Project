@@ -11,12 +11,8 @@ from django.core import serializers
 # 第一题返回函数
 def basic_info(request):
     if request.method == 'GET':
-        # try:
-        es_data = test.objects.all()
-        return_es_data = serializers.serialize('json', es_data, ensure_ascii=False)
+        return_es_data = json.dumps(get_input())
         return HttpResponse(return_es_data)
-        # except:
-        #     return HttpResponse('no')
 
 
 # 第二问
@@ -26,12 +22,12 @@ def distribute_node(request):
     if request.method == 'GET':
         final_list = []
         move_list = []
-        list1 = list(test.objects.all())
-        list2 = list(json.loads(serializers.serialize('json', list1, ensure_ascii=False)))
-        list3 = []
-        for i in list2:
-            list3.append(i["fields"])
-
+        # list1 = list(test.objects.all())
+        # list2 = list(json.loads(serializers.serialize('json', list1, ensure_ascii=False)))
+        # list3 = []
+        # for i in list2:
+        #     list3.append(i["fields"])
+        list3 = get_input()
         # 格式化store字段中的信息
         transfer_data_format(list3)
 
@@ -59,6 +55,15 @@ def distribute_node(request):
 
         json_dict = json.dumps(move_list)
         return HttpResponse(json_dict)
+
+def get_input():
+    file_path = os.path.abspath(os.path.dirname(__file__)) + str("\cluster.xlsx")
+    vm_data = pd.read_excel(io=file_path, names=None)
+    vm_data = vm_data.values.tolist()
+    move_list = []
+    for i in vm_data:
+        recorde_index_1(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], move_list)
+    return move_list
 
 
 def split_list(list1):
@@ -307,6 +312,11 @@ def transform_bm_data(name, store, cpu_num, memory, store_rate, cpu_rate, memory
     d = {'name': name, 'store': store, 'cpu_num': cpu_num, 'memory': memory, 'store_rate': store_rate,
          'cpu_rate': cpu_rate, 'memory_rate': memory_rate, 'avg_rate': avg_rate, 'stored_vm': stored_vm}
     target_data.append(d)
+
+# 将列表元素转化成字典
+def recorde_index_1(index, shard, prirep, state, docs, store, ip, node, move_list):
+    d = {'index': index, 'shard': shard, 'prirep': prirep,"state": state, "docs":docs, "store":store, "ip":ip, "node":node }
+    move_list.append(d)
 
 
 
